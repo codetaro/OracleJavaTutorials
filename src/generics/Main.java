@@ -37,6 +37,20 @@ public class Main {
         List<EvenNumber> le = new ArrayList<>();
         List<? extends NaturalNumber> ln = le;
 //        ln.add(new NaturalNumber(35));  // compile-time error
+        ln.add(null);
+        ln.clear();
+        Iterator<? extends NaturalNumber> it = ln.iterator();
+        List<? extends NaturalNumber> ln2 = new ArrayList<>();
+        while (it.hasNext()) {
+            NaturalNumber en = it.next();
+            if (en.isEven())
+                it.remove();
+        }
+
+        MyNode mn = new MyNode(5);
+        Node n = mn;
+        n.setData("Hello");
+        Integer x = mn.data;
     }
 
     public static <T extends Comparable<T>> int countGreaterThan(T[] anArray, T elem) {
@@ -64,5 +78,14 @@ public class Main {
         for (int i = 1; i <= 10; i++) {
             list.add(i);
         }
+    }
+
+    // Counts the number of occurrences of elem in anArray
+    public static <T> int count(T[] anArray, T elem) {
+        int cnt = 0;
+        for (T e : anArray)
+            if (e.equals(elem))
+                ++cnt;
+        return cnt;
     }
 }
