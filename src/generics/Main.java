@@ -2,7 +2,6 @@ package generics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class Main {
@@ -34,23 +33,6 @@ public class Main {
         printList(li);
         printList(ls);
 
-        List<EvenNumber> le = new ArrayList<>();
-        List<? extends NaturalNumber> ln = le;
-//        ln.add(new NaturalNumber(35));  // compile-time error
-        ln.add(null);
-        ln.clear();
-        Iterator<? extends NaturalNumber> it = ln.iterator();
-        List<? extends NaturalNumber> ln2 = new ArrayList<>();
-        while (it.hasNext()) {
-            NaturalNumber en = it.next();
-            if (en.isEven())
-                it.remove();
-        }
-
-        MyNode mn = new MyNode(5);
-        Node n = mn;
-        n.setData("Hello");
-        Integer x = mn.data;
     }
 
     public static <T extends Comparable<T>> int countGreaterThan(T[] anArray, T elem) {
