@@ -7,19 +7,33 @@ import java.util.List;
 public class Questions {
 
     public static void main(String[] args) {
+        Collection<Integer> ci = Arrays.asList(1, 2, 3, 4);
+        int count = Answer1.countIf(ci, new OddPredicate());
+        System.out.println("Number of odd integers = " + count);
     }
 }
 
 // #1. Write a generic method to count the number of elements in a collection that have a specific property.
 class Answer1 {
-    public <E extends Number> int countPrimes(List<E> list) {
+    public static <T> int countIf(Collection<T> c, UnaryPredicate<T> p) {
         int cnt = 0;
-        for (E e : list) {
-            if (e.getClass().getName().equals("Prime")) {
+        for (T elem : c) {
+            if (p.test(elem)) {
                 cnt++;
             }
         }
         return cnt;
+    }
+}
+
+interface UnaryPredicate<T> {
+    public boolean test(T obj);
+}
+
+class OddPredicate implements UnaryPredicate<Integer> {
+    @Override
+    public boolean test(Integer i) {
+        return i % 2 != 0;
     }
 }
 
@@ -79,19 +93,6 @@ class Answer6 {
 // Yes
 
 // #8. Write a generic method to find the maximal element in the range [begin, end) of a list.
-class Answer8 {
-    public <E extends java.lang.Comparable<E>> E maxInRange(List<E> list, int begin, int end) {
-        List<E> range = list.subList(begin, end);
-        E max = range.get(0);
-        for (E e : range) {
-            if (e.compareTo(max) > 0) {
-                max = e;
-            }
-        }
-        return max;
-    }
-}
-
 final class Solution8 {
     public static <T extends Object & Comparable<? super T>>
     T max(List<? extends T> list, int begin, int end) {
@@ -113,17 +114,6 @@ final class Solution8 {
 // Yes
 
 // #12. How do you invoke the following method to find the first integer in a list that is relatively prime to a list of specified integers?
-interface UnaryPredicate<T> {
-    public boolean test(T obj);
-}
-
-class OddPredicate implements UnaryPredicate<Integer> {
-    @Override
-    public boolean test(Integer i) {
-        return i % 2 != 0;
-    }
-}
-
 final class Algorithm12 {
 
     public static <T>

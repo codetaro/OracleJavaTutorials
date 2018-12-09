@@ -12,13 +12,16 @@ public class Restrictions {
         // #1. Cannot Instantiate Generic Types with Primitive Types
         Pair2<Integer, Character> p = new Pair2<>(8, 'a');
 
+        // #2. Cannot Create Instances of Type Parameters
+        List<String> ls = new ArrayList<>();
+        append(ls, String.class);
+
         // #5. Cannot Create Arrays of Parameterized Types
         /*Object[] stringLists = new List<String>[2];
         stringLists[0] = new ArrayList<String>();
         stringLists[1] = new ArrayList<Integer>();*/
     }
 
-    // #2. Cannot Create Instances of Type Parameters
     /*public static <E> void append(List<E> list) {
         E elem = new E();
         list.add(elem);
@@ -37,17 +40,6 @@ public class Restrictions {
         if (list instanceof ArrayList<?>) {
         }
     }
-
-    // #6. Cannot Create, Catch, or Throw Objects of Parameterized Types
-    /*public static <T extends Exception, J> void execute(List<J> jobs) {
-        try {
-            for (J job : jobs) {
-                // ...
-            }
-        } catch (T e) {  // compile-time error
-            // ...
-        }
-    }*/
 }
 
 class Pair2<K, V> {
@@ -70,6 +62,14 @@ class MobileDevice<T> {
 //class MathException<T> extends Exception {}       // extends Throwable indirectly
 //class QueueFullException<T> extends Throwable {}  // extends Throwable directly
 class Parser<T extends Exception> {
+
+    /*public static <T extends Exception, J> void execute(List<J> jobs) {
+        try {
+
+        } catch (T e) {
+
+        }
+    }*/
 
     public void parse(File file) throws T {
     }
